@@ -1,0 +1,141 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Boop",
+	"patterns": [
+		{
+			"include": "#statements"
+		},
+		{
+			"include": "#expression"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.boop",
+				"match": "\\b(set|flag|each)\\b"
+			}]
+		},
+		"statements": {
+			"patterns": [
+				{ "include": "#comment" },
+				{ "include": "#set-statement" },
+				{ "include": "#task-statement" },
+				{ "include": "#requires-statement" },
+				{ "include": "#provides-statement" },
+				{ "include": "#run-statement" },
+				{ "include": "#flag-statement" },
+				{ "include": "#each-statement" }
+			]
+		},
+		"comment": {
+			"patterns": [{
+				"match": "^\\s*#.*",
+				"captures": {
+					"0": { "name": "comment.line.boop" }
+				}
+			}]
+		},
+		"set-statement": {
+			"patterns": [{
+				"match": "^\\s*(set)\\b(?:\\s+([_a-zA-Z][_a-zA-Z0-9-]*)\\b(?:\\s+(=))?)?",
+				"captures": {
+					"1": { "name": "keyword.control.boop" },
+					"2": { "name": "variable.other.object.boop" },
+					"3": { "name": "keyword.operator.assignment.js" }
+				}
+			}]
+		},
+		"task-statement": {
+			"patterns": [{
+				"match": "^\\s*(task)\\b(?:\\s+([_a-zA-Z][_a-zA-Z0-9-]*)\\b)?",
+				"captures": {
+					"1": { "name": "keyword.control.boop" },
+					"2": { "name": "entity.name.function.task.boop" }
+				}
+			}]
+		},
+		"requires-statement": {
+			"patterns": [
+				{
+					"include": "#requires-task-statement"
+				}
+			]
+		},
+		"requires-task-statement": {
+			"patterns": [{
+				"match": "^\\s*(requires)\\b(?:\\s+(task)\\b(?:\\s+([_a-zA-Z][_a-zA-Z0-9-]*))?)?",
+				"captures": {
+					"1": { "name": "keyword.control.boop" },
+					"2": { "name": "keyword.control.boop" },
+					"3": { "name": "entity.name.function.task.boop" }
+				}
+			}]
+		},
+		"provides-statement": {
+			"patterns": [{
+				"name": "keyword.control.boop",
+				"match": "^\\s*(provides)\\b"
+			}]
+		},
+		"each-statement": {
+			"patterns": [{
+				"match": "^\\s*(each)\\b(?:\\s+([_a-zA-Z][_a-zA-Z0-9-]*)(?:\\s+(in)\\b)?)?",
+				"captures": {
+					"1": { "name": "keyword.control.boop" },
+					"2": { "name": "variable.other.object.boop" },
+					"3": { "name": "keyword.control.boop" }
+				}
+				}]
+		},
+		"run-statement": {
+			"patterns": [{
+				"match": "^\\s*(?:(optional)\\s+)?(run)\\b",
+				"captures": {
+					"1": { "name": "storage.type.boop" },
+					"2": { "name": "keyword.control.boop" }
+				}
+			}]
+		},
+		"flag-statement": {
+			"patterns": [{
+				"match": "^\\s*(flag)\\b(?:(?:\\s+(not))?(?:\\s+([_a-zA-Z][_a-zA-Z0-9-]*)\\b))?",
+				"captures": {
+					"1": { "name": "keyword.control.boop" },
+					"2": { "name": "keyword.control.boop" },
+					"3": { "name": "variable.other.flag.boop" }
+				}
+			}]
+		},
+		"variable-expression": {
+			"name": "string.interpolated.boop",
+			"match": "\\{\\s*([_a-zA-Z][_a-zA-Z0-9.-]*)\\s*\\}",
+			"captures": {
+				"1": { "name": "variable.other.object.boop" }
+			}
+		},
+		"glob-expression": {
+			"name": "string.interpolated.boop",
+			"match": "\\{\\s*((?:[a-zA-Z0-9_*/.-]|'\\ ')*\\*(?:[a-zA-Z0-9_*/.-]|'\\ ')*)\\s*(?:\\b(as)\\b)?[^}]*\\}",
+			"captures": {
+				"1": { "name": "string.regex.boop" },
+				"2": { "name": "keyword.control.boop" }
+			}
+		},
+		"unknown-expression": {
+			"name": "string.interpolated.boop",
+			"match": "\\{(.*)\\}",
+			"captures": {
+				"1": { "name": "source.boop" }
+			}
+		},
+		"expression": {
+			"patterns": [
+				{ "include": "#variable-expression" },
+				{ "include": "#glob-expression" },
+				{ "include": "#unknown-expression" }
+			]
+		}
+	},
+	"scopeName": "source.boop"
+}
