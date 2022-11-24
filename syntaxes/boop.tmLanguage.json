@@ -23,6 +23,7 @@
 				{ "include": "#task-statement" },
 				{ "include": "#requires-statement" },
 				{ "include": "#provides-statement" },
+				{ "include": "#cd-statement" },
 				{ "include": "#run-statement" },
 				{ "include": "#flag-statement" },
 				{ "include": "#each-statement" }
@@ -87,6 +88,14 @@
 					"3": { "name": "keyword.control.boop" }
 				}
 				}]
+		},
+		"cd-statement": {
+			"patterns": [{
+				"match": "^\\s*(cd)\\b",
+				"captures": {
+					"1": { "name": "keyword.control.boop" }
+				}
+			}]
 		},
 		"run-statement": {
 			"patterns": [{
