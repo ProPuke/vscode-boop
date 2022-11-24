@@ -114,6 +114,14 @@
 				"1": { "name": "variable.other.object.boop" }
 			}
 		},
+		"rename-variable-expression": {
+			"name": "string.interpolated.boop",
+			"match": "\\{\\s*([_a-zA-Z][_a-zA-Z0-9.-]*)\\s+(?:\\b(as)\\b)?[^}]*\\}",
+			"captures": {
+				"1": { "name": "variable.other.object.boop" },
+				"2": { "name": "keyword.control.boop" }
+			}
+		},
 		"eval-expression": {
 			"name": "string.interpolated.boop",
 			"match": "\\{\\s*(eval)\\b([^}]*)}",
@@ -139,6 +147,7 @@
 		"expression": {
 			"patterns": [
 				{ "include": "#variable-expression" },
+				{ "include": "#rename-variable-expression" },
 				{ "include": "#eval-expression" },
 				{ "include": "#glob-expression" },
 				{ "include": "#unknown-expression" }
