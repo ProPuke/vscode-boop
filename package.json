@@ -3,7 +3,7 @@
 	"displayName": "Boop!",
 	"description": "Syntax highlighting for Boop! build scripts",
 	"icon": "icon@2x.png",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"publisher": "ProPuke",
 	"license": "MIT",
 	"engines": {
