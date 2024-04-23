@@ -116,16 +116,19 @@
 				}
 			}]
 		},
+		"escaped-expression": {
+			"match": "([{}])\\1"
+		},
 		"variable-expression": {
 			"name": "string.interpolated.boop",
-			"match": "\\{\\s*([_a-zA-Z][_a-zA-Z0-9.-]*)\\s*\\}",
+			"match": "\\{\\s*([_a-zA-Z][_a-zA-Z0-9.-]*)\\s*\\}(?!\\})",
 			"captures": {
 				"1": { "name": "variable.other.object.boop" }
 			}
 		},
 		"rename-variable-expression": {
 			"name": "string.interpolated.boop",
-			"match": "\\{\\s*([_a-zA-Z][_a-zA-Z0-9.-]*)\\s+(?:\\b(as)\\b)?[^}]*\\}",
+			"match": "\\{\\s*([_a-zA-Z][_a-zA-Z0-9.-]*)\\s+(?:\\b(as)\\b)?[^{}]*\\}(?!\\})",
 			"captures": {
 				"1": { "name": "variable.other.object.boop" },
 				"2": { "name": "keyword.control.boop" }
@@ -133,14 +136,14 @@
 		},
 		"eval-expression": {
 			"name": "string.interpolated.boop",
-			"match": "\\{\\s*(eval)\\b([^}]*)}",
+			"match": "\\{\\s*(eval)\\b([^{}]*)}",
 			"captures": {
 				"1": { "name": "keyword.control.boop" }
 			}
 		},
 		"glob-expression": {
 			"name": "string.interpolated.boop",
-			"match": "\\{\\s*((?:[a-zA-Z0-9_*/.-]|'\\ ')*\\*(?:[a-zA-Z0-9_*/.-]|'\\ ')*)\\s*(?:\\b(as)\\b)?[^}]*\\}",
+			"match": "\\{\\s*((?:[a-zA-Z0-9_*/.-]|'\\ ')*\\*(?:[a-zA-Z0-9_*/.-]|'\\ ')*)\\s*(?:\\b(as)\\b)?[^{}]*\\}(?!\\})",
 			"captures": {
 				"1": { "name": "string.regex.boop" },
 				"2": { "name": "keyword.control.boop" }
@@ -148,13 +151,14 @@
 		},
 		"unknown-expression": {
 			"name": "string.interpolated.boop",
-			"match": "\\{(.*)\\}",
+			"match": "\\{([^{}]*)\\}(?!\\})",
 			"captures": {
 				"1": { "name": "source.boop" }
 			}
 		},
 		"expression": {
 			"patterns": [
+				{ "include": "#escaped-expression" },
 				{ "include": "#variable-expression" },
 				{ "include": "#rename-variable-expression" },
 				{ "include": "#eval-expression" },
